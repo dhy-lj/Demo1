@@ -1,0 +1,400 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>纪念日❤️</title>
+    <!-- 引入 FontAwesome 图标库 (用于底部图标) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ================= 基础样式重置 ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* ================= 顶部导航栏 ================= */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
+            backdrop-filter: blur(5px);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #888;
+            font-size: 13px;
+            margin-left: 20px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b81; /* 鼠标悬停变粉色 */
+        }
+
+        /* ================= 主视觉背景区 ================= */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 65vh; /* 占据屏幕上方 65% */
+            /* 使用一张类似原图的欧洲街景占位图 */
+            background-image: url('https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=2076&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 50px; /* 避开顶部导航 */
+        }
+
+        /* 毛玻璃悬浮卡片 */
+        .glass-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.25); /* 半透明白 */
+            backdrop-filter: blur(12px); /* 核心：毛玻璃模糊效果 */
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 25px 50px;
+            width: 450px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .avatar-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .avatar-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: #fff;
+            object-fit: cover;
+            border: 2px solid #fff;
+        }
+
+        .avatar-name {
+            margin-top: 8px;
+            font-size: 20px;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        /* 中间的爱心 */
+        .heart-icon {
+            color: #ff4757;
+            font-size: 52px;
+            /* 添加心跳动画 */
+            animation: heartbeat 1.2s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.15); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.15); }
+            60% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        /* ================= 倒计时区域 ================= */
+        .countdown-section {
+            text-align: center;
+            padding: 40px 20px;
+            background: #fff;
+        }
+
+        .countdown-subtitle {
+            color: #ff6b81;
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .countdown-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2d3436;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .countdown-title .unit {
+            font-size: 14px;
+            color: #636e72;
+            font-weight: normal;
+        }
+
+        .countdown-title .number {
+            font-size: 36px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* ================= 底部功能区网格 ================= */
+        .features-section {
+            background: #fff;
+            padding: 20px 20px 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .features-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px 60px;
+            max-width: 800px;
+            margin-top: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        /* 为不同的图标设置不同的背景颜色 */
+        .bg-blue { background: #00d2d3; }
+        .bg-pink { background: #ff9ff3; }
+        .bg-purple { background: #5f27cd; }
+        .bg-yellow { background: #feca57; }
+        .bg-orange { background: #ff9f43; }
+
+        .feature-text {
+            text-align: left;
+        }
+
+        .feature-text h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2d3436;
+            margin-bottom: 3px;
+        }
+
+        .feature-text p {
+            font-size: 11px;
+            color: #b2bec3;
+            letter-spacing: 1px;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 600px) {
+            .glass-card {
+                width: 90%;
+                padding: 15px 20px;
+            }
+            .countdown-title {
+                font-size: 24px;
+                flex-wrap: wrap;
+            }
+            .countdown-title .number {
+                font-size: 28px;
+            }
+            .features-grid {
+                gap: 20px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航 -->
+    <header>
+        <div class="logo">独属于我们的纪念网站💕</div>
+        <div class="nav-links">
+            <a href="#">首页</a>
+            <a href="#">更多精彩</a>
+        </div>
+    </header>
+
+    <!-- 主视觉背景 & 悬浮卡片 -->
+    <div class="hero-section">
+        <div class="glass-card">
+            <!-- 左侧头像 (可以替换为你自己的图片路径) -->
+            <div class="avatar-box">
+                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Luna" alt="M" class="avatar-img">
+                <span class="avatar-name">邓航宇</span>
+            </div>
+            
+            <!-- 中间跳动爱心 -->
+            <div class="heart-icon">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+
+            <!-- 右侧头像 (可以替换为你自己的图片路径) -->
+            <div class="avatar-box">
+                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Felix" alt="L" class="avatar-img">
+                <span class="avatar-name">林洁</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 倒计时部分 -->
+    <div class="countdown-section">
+        <div class="countdown-subtitle">这是我们 一起走过的</div>
+        <!-- 注意这里加了 id，用于 JS 获取 -->
+        <div class="countdown-title">
+            <span class="number" id="days">0</span> <span class="unit">天</span>
+            <span class="number" id="hours">00</span> <span class="unit">时</span>
+            <span class="number" id="minutes">00</span> <span class="unit">分</span>
+            <span class="number" id="seconds">00</span> <span class="unit">秒</span>
+        </div>
+    </div>
+
+    <!-- 底部功能区网格 -->
+    <div class="features-section">
+        <div class="features-grid">
+            
+            <!-- 功能项 1 -->
+            <div class="feature-item">
+                <div class="icon-circle bg-blue">
+                    <i class="fa-solid fa-droplet"></i>
+                </div>
+                <div class="feature-text">
+                    <h4>点点滴漏</h4>
+                    <p>COUNTDOWN</p>
+                </div>
+            </div>
+
+            <!-- 功能项 2 -->
+            <div class="feature-item">
+                <div class="icon-circle bg-pink">
+                    <i class="fa-solid fa-comment-dots"></i>
+                </div>
+                <div class="feature-text">
+                    <h4>留言板</h4>
+                    <p>MESSAGE</p>
+                </div>
+            </div>
+
+            <!-- 功能项 3 -->
+            <div class="feature-item">
+                <div class="icon-circle bg-purple">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <div class="feature-text">
+                    <h4>关于我们</h4>
+                    <p>ABOUT US</p>
+                </div>
+            </div>
+
+            <!-- 功能项 4 -->
+            <div class="feature-item">
+                <div class="icon-circle bg-yellow">
+                    <i class="fa-solid fa-camera"></i>
+                </div>
+                <div class="feature-text">
+                    <h4>Love Photo</h4>
+                    <p>MEMORY</p>
+                </div>
+            </div>
+
+            <!-- 功能项 5 -->
+            <div class="feature-item">
+                <div class="icon-circle bg-orange">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                </div>
+                <div class="feature-text">
+                    <h4>Love List</h4>
+                    <p>THINGS TO DO</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= 实时倒计时 JavaScript ================= -->
+    <script>
+        // 👇👇👇 在这里修改你们的开始日期 👇👇👇
+        // 格式：new Date(年, 月-1, 日, 时, 分, 秒)
+        // 注意：月份从 0 开始计算，0 代表 1 月，1 代表 2 月... 11 代表 12 月。
+        // 示例：2023年10月1日 00:00:00 -> new Date(2023, 9, 1, 0, 0, 0)
+        const startDate = new Date(2026, 8, 25, 0, 0, 0); 
+        // 👆👆👆 在这里修改你们的开始日期 👆👆👆
+
+        function updateCountdown() {
+            // 获取当前时间
+            const now = new Date();
+            
+            // 计算时间差 (毫秒)
+            const diff = now - startDate;
+
+            if (diff < 0) {
+                // 如果设定的日期还没到，这里就先不处理
+                return; 
+            }
+
+            // 将毫秒转换为天、时、分、秒
+            const msInSecond = 1000;
+            const msInMinute = msInSecond * 60;
+            const msInHour = msInMinute * 60;
+            const msInDay = msInHour * 24;
+
+            const days = Math.floor(diff / msInDay);
+            const hours = Math.floor((diff % msInDay) / msInHour);
+            const minutes = Math.floor((diff % msInHour) / msInMinute);
+            const seconds = Math.floor((diff % msInMinute) / msInSecond);
+
+            // 将计算结果更新到网页上
+            document.getElementById('days').innerText = days;
+            // 使用 padStart 让个位数变成 05 这种格式，显得更整齐
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        }
+
+        // 页面加载完成后立即执行一次，避免出现闪烁
+        updateCountdown();
+
+        // 设置定时器，每 1000 毫秒（1秒）执行一次 updateCountdown 函数
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
